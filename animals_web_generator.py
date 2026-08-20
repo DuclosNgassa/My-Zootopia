@@ -8,16 +8,44 @@ def load_data(file_path):
 
 
 def display_animal(animal):
+    """
+    Display one animal
+    :param animal:
+    :return: None
+    """
     print(f"Name: {animal['name']}")
     print(f"Diet: {animal['characteristics']['diet']}")
     print(f"Location: {animal['locations']}")
     animal_type = animal['characteristics'].get('type', "Unknown")
     if animal_type != "Unknown":
         print(f"Type: {animal_type}")
-
-animals_data = load_data('data/animals_data.json')
-
-
-for animal in animals_data:
-    display_animal(animal)
     print()
+
+
+def generate_animals_data_string(animal):
+    """
+    Extract animal info from dictionary and return it as string
+    :param animal:
+    :return: str
+    """
+    output = ''
+    output +=f"Name: {animal['name']}\n"
+    output +=f"Diet: {animal['characteristics']['diet']}\n"
+    output +=f"Location: {animal['locations']}\n"
+    animal_type = animal['characteristics'].get('type', "Unknown")
+    if animal_type != "Unknown":
+        output +=f"Type: {animal_type}\n"
+
+    print(output)
+    return output
+
+
+def test():
+    animals_data = load_data('data/animals_data.json')
+
+    for animal in animals_data:
+        #display_animal(animal)
+        generate_animals_data_string(animal)
+
+if __name__ == "__main__":
+    test()
