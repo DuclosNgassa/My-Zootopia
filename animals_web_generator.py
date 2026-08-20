@@ -29,13 +29,15 @@ def generate_animals_data_string(animal):
     :return: str
     """
     output = ''
-    output +=f"Name: {animal['name']}\n"
-    output +=f"Diet: {animal['characteristics']['diet']}\n"
-    output +=f"Location: {animal['locations']}\n"
+    output += '<li class="cards__item">\n'
+    output +=f"Name: {animal['name']}<br/>\n"
+    output +=f"Diet: {animal['characteristics']['diet']}<br/>\n"
+    output +=f"Location: {animal['locations']}<br/>\n"
     animal_type = animal['characteristics'].get('type', "Unknown")
     if animal_type != "Unknown":
-        output +=f"Type: {animal_type}\n"
+        output +=f"Type: {animal_type}<br/>\n"
 
+    output += f"</li>\n"
     print(output)
     return output
 
