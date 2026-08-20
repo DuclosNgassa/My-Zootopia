@@ -40,16 +40,18 @@ def generate_animals_data_string(animal):
 
     output += f"  </p>\n"
     output += f"</li>\n"
-    print(output)
     return output
 
 
 def test():
     animals_data = load_data('data/animals_data.json')
 
+    final_output = ""
     for animal in animals_data:
         #display_animal(animal)
-        generate_animals_data_string(animal)
+        final_output += generate_animals_data_string(animal)
+
+    print(final_output)
 
 if __name__ == "__main__":
     test()
