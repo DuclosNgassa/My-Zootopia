@@ -7,24 +7,9 @@ def load_data(file_path):
         return json.load(handle)
 
 
-def display_animal(animal):
-    """
-    Display one animal
-    :param animal:
-    :return: None
-    """
-    print(f"Name: {animal['name']}")
-    print(f"Diet: {animal['characteristics']['diet']}")
-    print(f"Location: {animal['locations']}")
-    animal_type = animal['characteristics'].get('type', "Unknown")
-    if animal_type != "Unknown":
-        print(f"Type: {animal_type}")
-    print()
-
-
 def generate_animals_data_string(animal):
     """
-    Extract animal info from dictionary and return it as string
+    Extract animal info from dictionary and return it as HTML string
     :param animal:
     :return: str
     """
@@ -32,26 +17,23 @@ def generate_animals_data_string(animal):
     output += '<li class="cards__item">\n'
     output += f'  <div class="card__title">{animal['name']}</div>\n'
     output += '  <p class="card__text">\n'
-    output +=f"    <strong>Diet:</strong> {animal['characteristics']['diet']}<br/>\n"
-    output +=f"    <strong>Location:</strong> {animal['locations']}<br/>\n"
+    output += '    <ul>\n'
+    output +=f"      <li><strong>Diet:</strong> {animal['characteristics']['diet']}</li>\n"
+    output +=f"      <li><strong>Location:</strong> {animal['locations']}</li>\n"
     animal_type = animal['characteristics'].get('type', "Unknown")
     if animal_type != "Unknown":
-        output +=f"    <strong>Type:</strong> {animal_type}<br/>\n"
-
-    output += f"  </p>\n"
+        output +=f"      <li><strong>Type:</strong> {animal_type}</li>\n"
+    output += f'    </ul>\n'
     output += f"</li>\n"
     return output
 
 
-def test():
+def print_html_code():
+    """Print HTML code"""
     animals_data = load_data('data/animals_data.json')
 
     final_output = ""
     for animal in animals_data:
-        #display_animal(animal)
         final_output += generate_animals_data_string(animal)
 
     print(final_output)
-
-if __name__ == "__main__":
-    test()
