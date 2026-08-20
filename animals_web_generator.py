@@ -30,13 +30,15 @@ def generate_animals_data_string(animal):
     """
     output = ''
     output += '<li class="cards__item">\n'
-    output +=f"Name: {animal['name']}<br/>\n"
-    output +=f"Diet: {animal['characteristics']['diet']}<br/>\n"
-    output +=f"Location: {animal['locations']}<br/>\n"
+    output += f'  <div class="card__title">{animal['name']}</div>\n'
+    output += '  <p class="card__text">\n'
+    output +=f"    <strong>Diet:</strong> {animal['characteristics']['diet']}<br/>\n"
+    output +=f"    <strong>Location:</strong> {animal['locations']}<br/>\n"
     animal_type = animal['characteristics'].get('type', "Unknown")
     if animal_type != "Unknown":
-        output +=f"Type: {animal_type}<br/>\n"
+        output +=f"    <strong>Type:</strong> {animal_type}<br/>\n"
 
+    output += f"  </p>\n"
     output += f"</li>\n"
     print(output)
     return output
