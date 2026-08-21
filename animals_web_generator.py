@@ -1,5 +1,6 @@
 import json
 
+TO_REPLACE = "__REPLACE_ANIMALS_INFO__"
 
 def load_data(file_path):
     """Load json file"""
@@ -7,9 +8,9 @@ def load_data(file_path):
         return json.load(handle)
 
 
-def generate_animals_data_string(animal):
+def generate_animals_card_item(animal):
     """
-    Extract animal info from dictionary and return it as HTML string
+    Extract animal info from dictionary and return an HTML card item
     :param animal:
     :return: str
     """
@@ -28,19 +29,36 @@ def generate_animals_data_string(animal):
     return output
 
 
-def print_html_code():
-    """Print HTML code"""
+def read_from_file(file_path):
+    with open(file_path, 'r') as file:
+        return file.read()
+
+
+def write_to_file(file_path, content):
+    with open(file_path, 'w') as file:
+        file.write(content)
+
+
+def generate_html_code():
+    """Generate animal cards HTML"""
     animals_data = load_data('data/animals_data.json')
 
-    final_output = ""
+    animal_cards = ""
     for animal in animals_data:
-        final_output += generate_animals_data_string(animal)
+        animal_cards += generate_animals_card_item(animal)
 
-    print(final_output)
+    return animal_cards
 
 
 def main():
-    print_html_code()
+    animal_cards = generate_html_code()
+    html_template = read_from_file('animals_template.html')
+
+    html_content = html_template.replace(TO_REPLACE, animal_cards)
+    write_to_file('animals.html', html_content)
+
+    print(html_content)
+
 
 if __name__ == "__main__":
     main()
